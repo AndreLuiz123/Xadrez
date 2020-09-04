@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de tiro</title>
+</head>
+<body>
+    
+    <canvas></canvas>
+    
+    <script>
+    
+        var canvas = document.querySelector("canvas");
+        canvas.width = 900;
+        canvas.height = 500;
+        
+        var dt = 0;
+        var anterior = 0;
+        var ctx = canvas.getContext("2d");
+
+        function passo(t)//Main loop
+        {
+            dt = (t - anterior)/1000;
+
+            anterior = t;
+            requestAnimationFrame(passo);
+        }
+
+        requestAnimationFrame(passo);
+
+    </script>
+</body>
+</html>
