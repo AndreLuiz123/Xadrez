@@ -27,13 +27,23 @@
         var ctx = canvas.getContext("2d");
 
         var tabuleiro = new Tabuleiro(8,8,canvas);
-        var peao = new Sprite(1,1, tabuleiro);
-        var peao2 = new Sprite(1,2, tabuleiro,0);
-        var rei = new Rei(2,2, tabuleiro);
-        var torre = new Torre(2,3, tabuleiro);
-        var bispo = new Bispo(2,4, tabuleiro);
-        var rainha = new Rainha(2,5,tabuleiro);
-        var cavalo = new Cavalo(2,6,tabuleiro,0);
+        var reiBranco = new Rei(4,7, tabuleiro);
+        var rainhaBranco = new Rainha(3,7,tabuleiro);
+        var torre1Branco = new Torre(7,7, tabuleiro);
+        var torre2Branco = new Torre(0,7, tabuleiro);
+        var bispo1Branco = new Bispo(5,7, tabuleiro);
+        var bispo2Branco = new Bispo(2,7, tabuleiro);
+        var cavalo1Branco = new Cavalo(6,7,tabuleiro);
+        var cavalo2Branco = new Cavalo(1,7,tabuleiro);
+
+        var reiPreto = new Rei(4,0, tabuleiro,0);
+        var rainhaPreto = new Rainha(3,0,tabuleiro,0);
+        var torre1Preto = new Torre(0,0, tabuleiro,0);
+        var torre2Preto = new Torre(7,0, tabuleiro,0);
+        var bispo1Preto = new Bispo(5,0, tabuleiro,0);
+        var bispo2Preto = new Bispo(2,0, tabuleiro,0);
+        var cavalo1Preto = new Cavalo(6,0,tabuleiro,0);
+        var cavalo2Preto = new Cavalo(1,0,tabuleiro,0);
 
         tabuleiro.criaGrid();
 
@@ -48,14 +58,24 @@
             ctx.fillRect(0,0,canvas.width, canvas.height);
 
             tabuleiro.desenhar(ctx);
-            peao.desenhar(ctx);
-            peao2.desenhar(ctx);
 
-            rei.desenhar(ctx);
-            torre.desenhar(ctx);
-            bispo.desenhar(ctx);
-            rainha.desenhar(ctx);
-            cavalo.desenhar(ctx);
+            reiBranco.desenhar(ctx);
+            torre1Branco.desenhar(ctx);
+            torre2Branco.desenhar(ctx);
+            bispo1Branco.desenhar(ctx);
+            bispo2Branco.desenhar(ctx);
+            cavalo1Branco.desenhar(ctx);
+            cavalo2Branco.desenhar(ctx);
+            rainhaBranco.desenhar(ctx);
+
+            reiPreto.desenhar(ctx);
+            torre1Preto.desenhar(ctx);
+            torre2Preto.desenhar(ctx);
+            bispo1Preto.desenhar(ctx);
+            bispo2Preto.desenhar(ctx);
+            cavalo1Preto.desenhar(ctx);
+            cavalo2Preto.desenhar(ctx);
+            rainhaPreto.desenhar(ctx);
 
             anterior = t;
             requestAnimationFrame(passo);
@@ -65,32 +85,30 @@
         canvas.onmouseup = myup;
 
         function mydown(e){
-          if(e.pageX<=cavalo.x +cavalo.w && e.pageX>cavalo.x && e.pageY<=cavalo.y +cavalo.h && e.pageY>=cavalo.y)
+          if(e.pageX<=reiBranco.x +reiBranco.w && e.pageX>reiBranco.x && e.pageY<=reiBranco.y +reiBranco.h && e.pageY>=reiBranco.y)
           {
             canvas.onmousemove = mymove;
-            tabuleiro.mudaStatusCasa(cavalo.letra,cavalo.numero,0);
+            tabuleiro.mudaStatusCasa(reiBranco.letra,reiBranco.numero,0);
           }
         }
 
         function mymove(e){    
-          cavalo.x = e.pageX -cavalo.w/2;
-          cavalo.y = e.pageY -cavalo.h/2;
+          reiBranco.x = e.pageX -reiBranco.w/2;
+          reiBranco.y = e.pageY -reiBranco.h/2;
         }
 
         function myup(e){
            if(canvas.onmousemove)
            {
                canvas.onmousemove = null;
-               if(cavalo.verificaValidadeCasa(cavalo.calculaLetra(cavalo.x+cavalo.w/2),cavalo.calculaNumero(cavalo.y +cavalo.h/2))
-                && tabuleiro.grid[cavalo.calculaLetra(cavalo.x+cavalo.w/2)][cavalo.calculaNumero(cavalo.y +cavalo.h/2)]===0) 
-                   cavalo.reposicionaPeca();
+               if(reiBranco.verificaValidadeCasa(reiBranco.calculaLetra(reiBranco.x+reiBranco.w/2),reiBranco.calculaNumero(reiBranco.y +reiBranco.h/2))
+                && tabuleiro.grid[reiBranco.calculaLetra(reiBranco.x+reiBranco.w/2)][reiBranco.calculaNumero(reiBranco.y +reiBranco.h/2)]===0) 
+                   reiBranco.reposicionaPeca();
                else
-                 cavalo.voltaPecaLocalOriginal(); 
+                 reiBranco.voltaPecaLocalOriginal(); 
            
-               tabuleiro.mudaStatusCasa(cavalo.letra,cavalo.numero,1);          
-
+               tabuleiro.mudaStatusCasa(reiBranco.letra,reiBranco.numero,1);          
            }
-
         }
 
         requestAnimationFrame(passo);
