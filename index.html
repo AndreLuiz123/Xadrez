@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo de tiro</title>
+    <script src="Grid.js"></script>
+    <script src="Sprite.js"></script>
 </head>
 <body>
     
@@ -12,19 +14,50 @@
     <script>
     
         var canvas = document.querySelector("canvas");
-        canvas.width = 900;
+        canvas.width = 500;
         canvas.height = 500;
         
         var dt = 0;
         var anterior = 0;
         var ctx = canvas.getContext("2d");
 
+        var tabuleiro = new Tabuleiro(8,8,canvas);
+        var peao = new Sprite(1,1, tabuleiro);
+        var peao2 = new Sprite(1,2, tabuleiro,0);
+
         function passo(t)//Main loop
         {
             dt = (t - anterior)/1000;
 
+            ctx.strokeStyle = "black";
+            ctx.strokeRect(0,0,canvas.width, canvas.height);
+
+            ctx.fillStyle = "white";
+            ctx.fillRect(0,0,canvas.width, canvas.height);
+
+            tabuleiro.desenhar(ctx);
+            peao.desenhar(ctx);
+            peao2.desenhar(ctx);
             anterior = t;
             requestAnimationFrame(passo);
+        }
+
+        canvas.onmousedown = mydown;
+        canvas.onmouseup = myup;
+
+        function mydown(e){
+          if(e.pageX<= peao.x + peao.w && e.pageX> peao.x && e.pageY<= peao.y + peao.h && e.pageY>= peao.y)
+            canvas.onmousemove = mymove;
+        }
+
+        function mymove(e){    
+            peao.x = e.pageX - peao.w/2;
+            peao.y = e.pageY - peao.h/2;
+        }
+
+        function myup(e){
+            canvas.onmousemove = null;
+            peao.reposicionaPeca();
         }
 
         requestAnimationFrame(passo);
