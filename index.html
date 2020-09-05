@@ -9,6 +9,7 @@
     <script src="Rei.js"></script>
     <script src="Torre.js"></script>
     <script src="Bispo.js"></script>
+    <script src="Rainha.js"></script>
 </head>
 <body>
     
@@ -30,7 +31,7 @@
         var rei = new Rei(2,2, tabuleiro);
         var torre = new Torre(2,3, tabuleiro);
         var bispo = new Bispo(2,4, tabuleiro);
-
+        var rainha = new Rainha(2,5,tabuleiro);
 
         function passo(t)//Main loop
         {
@@ -49,6 +50,7 @@
             rei.desenhar(ctx);
             torre.desenhar(ctx);
             bispo.desenhar(ctx);
+            rainha.desenhar(ctx);
 
             anterior = t;
             requestAnimationFrame(passo);
@@ -58,23 +60,23 @@
         canvas.onmouseup = myup;
 
         function mydown(e){
-          if(e.pageX<=bispo.x +bispo.w && e.pageX>bispo.x && e.pageY<=bispo.y +bispo.h && e.pageY>=bispo.y)
+          if(e.pageX<=rainha.x +rainha.w && e.pageX>rainha.x && e.pageY<=rainha.y +rainha.h && e.pageY>=rainha.y)
             canvas.onmousemove = mymove;
         }
 
         function mymove(e){    
-          bispo.x = e.pageX -bispo.w/2;
-          bispo.y = e.pageY -bispo.h/2;
+          rainha.x = e.pageX -rainha.w/2;
+          rainha.y = e.pageY -rainha.h/2;
         }
 
         function myup(e){
            if(canvas.onmousemove)
            {
                canvas.onmousemove = null;
-               if(bispo.verificaValidadeCasa(bispo.calculaLetra(bispo.x+bispo.w/2),bispo.calculaNumero(bispo.y +bispo.h/2)))
-                 bispo.reposicionaPeca();
+               if(rainha.verificaValidadeCasa(rainha.calculaLetra(rainha.x+rainha.w/2),rainha.calculaNumero(rainha.y +rainha.h/2)))
+                 rainha.reposicionaPeca();
                else
-                 bispo.voltaPecaLocalOriginal(); 
+                 rainha.voltaPecaLocalOriginal(); 
                
 
            }
