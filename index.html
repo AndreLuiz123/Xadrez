@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo de tiro</title>
+    <title>Xadrez</title>
     <script src="Grid.js"></script>
     <script src="Sprite.js"></script>
     <script src="Rei.js"></script>
@@ -81,7 +81,8 @@
            if(canvas.onmousemove)
            {
                canvas.onmousemove = null;
-               if(cavalo.verificaValidadeCasa(cavalo.calculaLetra(cavalo.x+cavalo.w/2),cavalo.calculaNumero(cavalo.y +cavalo.h/2))) 
+               if(cavalo.verificaValidadeCasa(cavalo.calculaLetra(cavalo.x+cavalo.w/2),cavalo.calculaNumero(cavalo.y +cavalo.h/2))
+                && tabuleiro.grid[cavalo.calculaLetra(cavalo.x+cavalo.w/2)][cavalo.calculaNumero(cavalo.y +cavalo.h/2)]===0) 
                    cavalo.reposicionaPeca();
                else
                  cavalo.voltaPecaLocalOriginal(); 

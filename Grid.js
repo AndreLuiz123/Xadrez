@@ -11,14 +11,16 @@ class Tabuleiro{
     }
 
     criaGrid(){
-        for(var i=0; i<this.linhas; i++)
-        {
-            this.grid[i] = [];
-            for(var j=0; j<this.colunas; j++)
-            {
-                this.grid[i][j] = 0;
-            }
-        }
+           this.grid = [
+            [1,1,0,0,0,0,1,1],
+            [1,1,0,0,0,0,1,1],
+            [1,1,0,0,0,0,1,1],
+            [1,1,0,0,0,0,1,1],
+            [1,1,0,0,0,0,1,1],
+            [1,1,0,0,0,0,1,1],
+            [1,1,0,0,0,0,1,1],
+            [1,1,0,0,0,0,1,1],
+            ]
     }
 
     desenhar(ctx){
@@ -38,7 +40,7 @@ class Tabuleiro{
                 ctx.strokeStyle = "black";
                 else
                 ctx.strokeStyle = "red";
-                
+
                 ctx.strokeRect(i*this.w,j*this.h,this.w,this.h);
 
 
