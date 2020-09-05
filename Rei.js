@@ -5,7 +5,8 @@ class Rei extends Sprite{
     }
 
     verificaValidadeCasa(letra,numero){
-        if(letra === this.letra+1)
+        if((Math.abs(letra - this.letra) <=1)&&
+            (Math.abs(numero - this.numero)<=1))
             return true;
         else
             return false;

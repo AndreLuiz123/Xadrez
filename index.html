@@ -64,7 +64,7 @@
            if(canvas.onmousemove)
            {
                canvas.onmousemove = null;
-               if(rei.verificaValidadeCasa(rei.calculaLetra(rei.x+rei.w/2), rei.calculaNumero(rei.y)))
+               if(rei.verificaValidadeCasa(rei.calculaLetra(rei.x+rei.w/2), rei.calculaNumero(rei.y + rei.h/2)))
                   rei.reposicionaPeca();
                else
                   rei.voltaPecaLocalOriginal(); 
