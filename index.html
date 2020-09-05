@@ -6,6 +6,7 @@
     <title>Jogo de tiro</title>
     <script src="Grid.js"></script>
     <script src="Sprite.js"></script>
+    <script src="Rei.js"></script>
 </head>
 <body>
     
@@ -24,6 +25,7 @@
         var tabuleiro = new Tabuleiro(8,8,canvas);
         var peao = new Sprite(1,1, tabuleiro);
         var peao2 = new Sprite(1,2, tabuleiro,0);
+        var rei = new Rei(2,2, tabuleiro);
 
         function passo(t)//Main loop
         {
@@ -38,6 +40,9 @@
             tabuleiro.desenhar(ctx);
             peao.desenhar(ctx);
             peao2.desenhar(ctx);
+
+            rei.desenhar(ctx);
+
             anterior = t;
             requestAnimationFrame(passo);
         }
@@ -46,18 +51,27 @@
         canvas.onmouseup = myup;
 
         function mydown(e){
-          if(e.pageX<= peao.x + peao.w && e.pageX> peao.x && e.pageY<= peao.y + peao.h && e.pageY>= peao.y)
+          if(e.pageX<=rei.x +rei.w && e.pageX>rei.x && e.pageY<=rei.y +rei.h && e.pageY>=rei.y)
             canvas.onmousemove = mymove;
         }
 
         function mymove(e){    
-            peao.x = e.pageX - peao.w/2;
-            peao.y = e.pageY - peao.h/2;
+           rei.x = e.pageX -rei.w/2;
+           rei.y = e.pageY -rei.h/2;
         }
 
         function myup(e){
-            canvas.onmousemove = null;
-            peao.reposicionaPeca();
+           if(canvas.onmousemove)
+           {
+               canvas.onmousemove = null;
+               if(rei.verificaValidadeCasa(rei.calculaLetra(rei.x+rei.w/2), rei.calculaNumero(rei.y)))
+                  rei.reposicionaPeca();
+               else
+                  rei.voltaPecaLocalOriginal(); 
+               
+
+           }
+
         }
 
         requestAnimationFrame(passo);

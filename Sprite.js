@@ -1,18 +1,18 @@
 class Sprite{
 
-    constructor(letra,numero, tabulerio, cor=1){
+    constructor(letra,numero, tabuleiro, cor=1){
         this.letra = letra;
         this.numero = numero;
 
-        this.tabuleiroW = tabulerio.w;
-        this.tabuleiroH = tabulerio.h;
+        this.tabuleiroW = tabuleiro.w;
+        this.tabuleiroH = tabuleiro.h;
 
         this.cor = cor;
 
-        this.w = tabulerio.w/2;
-        this.h = tabulerio.h/2;
-        this.x = this.letra*tabulerio.w + tabuleiro.w/4;
-        this.y = this.numero*tabulerio.h + tabuleiro.h/4;
+        this.w = tabuleiro.w/2;
+        this.h = tabuleiro.h/2;
+        this.x = this.letra*tabuleiro.w + tabuleiro.w/4;
+        this.y = this.numero*tabuleiro.h + tabuleiro.h/4;
     }
 
 
@@ -24,6 +24,26 @@ class Sprite{
         ctx.fillRect(this.x,this.y,this.w,this.h);
     }
 
+    calculaLetra(x){
+        var valorX = (x)%this.tabuleiroW;
+        var novoX = (x - valorX)/this.tabuleiroW;
+        console.log(novoX);
+        return novoX;
+    }
+
+    calculaNumero(y){
+        var valorY = (y)%this.tabuleiroH;
+        var novoY = (y - valorY)/this.tabuleiroH;
+        console.log(novoY);
+        return novoY;
+    }
+
+
+    calculaCasa(){
+        console.log(this.letra+" "+this.numero);
+        this.letra = this.calculaLetra(this.x);
+        this.numero = this.calculaNumero(this.y);
+    }
 
     reposicionaPeca(){
         
@@ -38,6 +58,12 @@ class Sprite{
 
         this.x = novoX;
         this.y = novoY;
+        this.calculaCasa();
+    }
+
+    voltaPecaLocalOriginal(){
+        this.x = this.letra*this.tabuleiroW + this.tabuleiroW/4;
+        this.y = this.numero*this.tabuleiroH + this.tabuleiroH/4;              
     }
 
 }
