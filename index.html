@@ -35,6 +35,8 @@
         var rainha = new Rainha(2,5,tabuleiro);
         var cavalo = new Cavalo(2,6,tabuleiro,0);
 
+        tabuleiro.criaGrid();
+
         function passo(t)//Main loop
         {
             dt = (t - anterior)/1000;
@@ -64,7 +66,10 @@
 
         function mydown(e){
           if(e.pageX<=cavalo.x +cavalo.w && e.pageX>cavalo.x && e.pageY<=cavalo.y +cavalo.h && e.pageY>=cavalo.y)
+          {
             canvas.onmousemove = mymove;
+            tabuleiro.mudaStatusCasa(cavalo.letra,cavalo.numero,0);
+          }
         }
 
         function mymove(e){    
@@ -76,11 +81,12 @@
            if(canvas.onmousemove)
            {
                canvas.onmousemove = null;
-               if(cavalo.verificaValidadeCasa(cavalo.calculaLetra(cavalo.x+cavalo.w/2),cavalo.calculaNumero(cavalo.y +cavalo.h/2)))
-                 cavalo.reposicionaPeca();
+               if(cavalo.verificaValidadeCasa(cavalo.calculaLetra(cavalo.x+cavalo.w/2),cavalo.calculaNumero(cavalo.y +cavalo.h/2))) 
+                   cavalo.reposicionaPeca();
                else
                  cavalo.voltaPecaLocalOriginal(); 
-               
+           
+               tabuleiro.mudaStatusCasa(cavalo.letra,cavalo.numero,1);          
 
            }
 

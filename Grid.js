@@ -34,11 +34,20 @@ class Tabuleiro{
                     ctx.fillRect(i*this.w,j*this.h,this.w,this.h);
                 }
 
+                if(this.grid[i][j]===0)
                 ctx.strokeStyle = "black";
+                else
+                ctx.strokeStyle = "red";
+                
                 ctx.strokeRect(i*this.w,j*this.h,this.w,this.h);
+
 
             }
         }   
+    }
+
+    mudaStatusCasa(letra,numero,status){
+        this.grid[letra][numero] = status;
     }
 
     
