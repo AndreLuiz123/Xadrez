@@ -27,20 +27,17 @@ class Sprite{
     calculaLetra(x){
         var valorX = (x)%this.tabuleiroW;
         var novoX = (x - valorX)/this.tabuleiroW;
-        console.log(novoX);
         return novoX;
     }
 
     calculaNumero(y){
         var valorY = (y)%this.tabuleiroH;
         var novoY = (y - valorY)/this.tabuleiroH;
-        console.log(novoY);
         return novoY;
     }
 
 
     calculaCasa(){
-        console.log(this.letra+" "+this.numero);
         this.letra = this.calculaLetra(this.x);
         this.numero = this.calculaNumero(this.y);
     }
@@ -54,7 +51,6 @@ class Sprite{
         var valorY = (this.y+this.h/2)%this.tabuleiroH;
         var novoY = (this.y - valorY);
         novoY = novoY + this.tabuleiroH/2;
-       // console.log(novoX+" "+novoY);
 
         this.x = novoX;
         this.y = novoY;

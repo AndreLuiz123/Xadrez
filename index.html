@@ -10,6 +10,7 @@
     <script src="Torre.js"></script>
     <script src="Bispo.js"></script>
     <script src="Rainha.js"></script>
+    <script src="Cavalo.js"></script>
 </head>
 <body>
     
@@ -32,6 +33,7 @@
         var torre = new Torre(2,3, tabuleiro);
         var bispo = new Bispo(2,4, tabuleiro);
         var rainha = new Rainha(2,5,tabuleiro);
+        var cavalo = new Cavalo(2,6,tabuleiro,0);
 
         function passo(t)//Main loop
         {
@@ -51,6 +53,7 @@
             torre.desenhar(ctx);
             bispo.desenhar(ctx);
             rainha.desenhar(ctx);
+            cavalo.desenhar(ctx);
 
             anterior = t;
             requestAnimationFrame(passo);
@@ -60,23 +63,23 @@
         canvas.onmouseup = myup;
 
         function mydown(e){
-          if(e.pageX<=rainha.x +rainha.w && e.pageX>rainha.x && e.pageY<=rainha.y +rainha.h && e.pageY>=rainha.y)
+          if(e.pageX<=cavalo.x +cavalo.w && e.pageX>cavalo.x && e.pageY<=cavalo.y +cavalo.h && e.pageY>=cavalo.y)
             canvas.onmousemove = mymove;
         }
 
         function mymove(e){    
-          rainha.x = e.pageX -rainha.w/2;
-          rainha.y = e.pageY -rainha.h/2;
+          cavalo.x = e.pageX -cavalo.w/2;
+          cavalo.y = e.pageY -cavalo.h/2;
         }
 
         function myup(e){
            if(canvas.onmousemove)
            {
                canvas.onmousemove = null;
-               if(rainha.verificaValidadeCasa(rainha.calculaLetra(rainha.x+rainha.w/2),rainha.calculaNumero(rainha.y +rainha.h/2)))
-                 rainha.reposicionaPeca();
+               if(cavalo.verificaValidadeCasa(cavalo.calculaLetra(cavalo.x+cavalo.w/2),cavalo.calculaNumero(cavalo.y +cavalo.h/2)))
+                 cavalo.reposicionaPeca();
                else
-                 rainha.voltaPecaLocalOriginal(); 
+                 cavalo.voltaPecaLocalOriginal(); 
                
 
            }

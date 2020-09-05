@@ -5,8 +5,8 @@ class Cavalo extends Sprite{
     }
 
     verificaValidadeCasa(letra,numero){
-        if((Math.abs(letra - this.letra) === 3 && Math.abs(numero - this.numero) === 1)
-            || (Math.abs(letra - this.letra) === 1 && Math.abs(numero - this.numero) === 3))
+        if((Math.abs(letra - this.letra) === 2 && Math.abs(numero - this.numero) === 1)
+            || (Math.abs(letra - this.letra) === 1 && Math.abs(numero - this.numero) === 2))
             return true;
         else
             return false;
