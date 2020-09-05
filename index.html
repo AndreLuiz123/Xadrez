@@ -7,6 +7,7 @@
     <script src="Grid.js"></script>
     <script src="Sprite.js"></script>
     <script src="Rei.js"></script>
+    <script src="Torre.js"></script>
 </head>
 <body>
     
@@ -26,6 +27,7 @@
         var peao = new Sprite(1,1, tabuleiro);
         var peao2 = new Sprite(1,2, tabuleiro,0);
         var rei = new Rei(2,2, tabuleiro);
+        var torre = new Torre(2,3, tabuleiro);
 
         function passo(t)//Main loop
         {
@@ -42,6 +44,7 @@
             peao2.desenhar(ctx);
 
             rei.desenhar(ctx);
+           torre.desenhar(ctx);
 
             anterior = t;
             requestAnimationFrame(passo);
@@ -51,23 +54,23 @@
         canvas.onmouseup = myup;
 
         function mydown(e){
-          if(e.pageX<=rei.x +rei.w && e.pageX>rei.x && e.pageY<=rei.y +rei.h && e.pageY>=rei.y)
+          if(e.pageX<=torre.x +torre.w && e.pageX>torre.x && e.pageY<=torre.y +torre.h && e.pageY>=torre.y)
             canvas.onmousemove = mymove;
         }
 
         function mymove(e){    
-           rei.x = e.pageX -rei.w/2;
-           rei.y = e.pageY -rei.h/2;
+          torre.x = e.pageX -torre.w/2;
+          torre.y = e.pageY -torre.h/2;
         }
 
         function myup(e){
            if(canvas.onmousemove)
            {
                canvas.onmousemove = null;
-               if(rei.verificaValidadeCasa(rei.calculaLetra(rei.x+rei.w/2), rei.calculaNumero(rei.y + rei.h/2)))
-                  rei.reposicionaPeca();
+               if(torre.verificaValidadeCasa(torre.calculaLetra(torre.x+torre.w/2),torre.calculaNumero(torre.y +torre.h/2)))
+                 torre.reposicionaPeca();
                else
-                  rei.voltaPecaLocalOriginal(); 
+                 torre.voltaPecaLocalOriginal(); 
                
 
            }
