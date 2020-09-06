@@ -5,16 +5,16 @@ class Peao extends Sprite{
     }
 
     verificaValidadeCasa(letra,numero){
-        console.log(numero+" "+Number(this.numero+1));
+        console.log(letra+" "+this.letra);
         if(this.cor)
         {
-            if(numero === this.numero-1)
+            if(numero === this.numero-1 && letra === this.letra)
                 return true;
             else
                 return false;
         }else
         {
-            if(numero === this.numero+1)
+            if(numero === this.numero+1 && letra === this.letra)
                 return true;
             else
                 return false;
