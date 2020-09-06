@@ -45,6 +45,27 @@
         var cavalo1Preto = new Cavalo(6,0,tabuleiro,0);
         var cavalo2Preto = new Cavalo(1,0,tabuleiro,0);
 
+        var pecas = [];
+
+        pecas.push(reiBranco);
+        pecas.push(rainhaBranco); 
+        pecas.push(torre1Branco);
+        pecas.push(torre2Branco); 
+        pecas.push(bispo1Branco);
+        pecas.push(bispo2Branco);
+        pecas.push(cavalo1Branco); 
+        pecas.push(cavalo2Branco); 
+
+        pecas.push(reiPreto);
+        pecas.push(rainhaPreto); 
+        pecas.push(torre1Preto);
+        pecas.push(torre2Preto); 
+        pecas.push(bispo1Preto);
+        pecas.push(bispo2Preto);
+        pecas.push(cavalo1Preto); 
+        pecas.push(cavalo2Preto); 
+
+
         tabuleiro.criaGrid();
 
         function passo(t)//Main loop
@@ -83,32 +104,45 @@
 
         canvas.onmousedown = mydown;
         canvas.onmouseup = myup;
+        var pecaMovimentada = null
 
         function mydown(e){
-          if(e.pageX<=reiBranco.x +reiBranco.w && e.pageX>reiBranco.x && e.pageY<=reiBranco.y +reiBranco.h && e.pageY>=reiBranco.y)
-          {
-            canvas.onmousemove = mymove;
-            tabuleiro.mudaStatusCasa(reiBranco.letra,reiBranco.numero,0);
-          }
+
+            for(var i=0; i<pecas.length; i++)
+            {
+                if(e.pageX<=pecas[i].x +pecas[i].w && e.pageX>pecas[i].x && e.pageY<=pecas[i].y +pecas[i].h && e.pageY>=pecas[i].y)
+                {
+                    console.log("foi");
+                    pecaMovimentada = pecas[i];
+                    break;
+                }
+            }
+            if(pecaMovimentada)
+            {
+                tabuleiro.mudaStatusCasa(pecaMovimentada.letra,pecaMovimentada.numero,0);
+                canvas.onmousemove = mymove;
+            }
         }
 
         function mymove(e){    
-          reiBranco.x = e.pageX -reiBranco.w/2;
-          reiBranco.y = e.pageY -reiBranco.h/2;
+          pecaMovimentada.x = e.pageX -pecaMovimentada.w/2;
+          pecaMovimentada.y = e.pageY -pecaMovimentada.h/2;
         }
 
         function myup(e){
            if(canvas.onmousemove)
            {
                canvas.onmousemove = null;
-               if(reiBranco.verificaValidadeCasa(reiBranco.calculaLetra(reiBranco.x+reiBranco.w/2),reiBranco.calculaNumero(reiBranco.y +reiBranco.h/2))
-                && tabuleiro.grid[reiBranco.calculaLetra(reiBranco.x+reiBranco.w/2)][reiBranco.calculaNumero(reiBranco.y +reiBranco.h/2)]===0) 
-                   reiBranco.reposicionaPeca();
+               if(pecaMovimentada.verificaValidadeCasa(pecaMovimentada.calculaLetra(pecaMovimentada.x+pecaMovimentada.w/2),pecaMovimentada.calculaNumero(pecaMovimentada.y +pecaMovimentada.h/2))
+                && tabuleiro.grid[pecaMovimentada.calculaLetra(pecaMovimentada.x+pecaMovimentada.w/2)][pecaMovimentada.calculaNumero(pecaMovimentada.y +pecaMovimentada.h/2)]===0) 
+                   pecaMovimentada.reposicionaPeca();
                else
-                 reiBranco.voltaPecaLocalOriginal(); 
+                 pecaMovimentada.voltaPecaLocalOriginal(); 
            
-               tabuleiro.mudaStatusCasa(reiBranco.letra,reiBranco.numero,1);          
-           }
+               tabuleiro.mudaStatusCasa(pecaMovimentada.letra,pecaMovimentada.numero,1);          
+
+               pecaMovimentada = null;
+            }
         }
 
         requestAnimationFrame(passo);
