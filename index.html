@@ -11,6 +11,7 @@
     <script src="Bispo.js"></script>
     <script src="Rainha.js"></script>
     <script src="Cavalo.js"></script>
+    <script src="Peao.js"></script>
 </head>
 <body>
     
@@ -25,6 +26,8 @@
         var dt = 0;
         var anterior = 0;
         var ctx = canvas.getContext("2d");
+        
+        var pecas = [];
 
         var tabuleiro = new Tabuleiro(8,8,canvas);
         var reiBranco = new Rei(4,7, tabuleiro);
@@ -35,6 +38,7 @@
         var bispo2Branco = new Bispo(2,7, tabuleiro);
         var cavalo1Branco = new Cavalo(6,7,tabuleiro);
         var cavalo2Branco = new Cavalo(1,7,tabuleiro);
+        var peao = new Peao(1,6,tabuleiro);
 
         var reiPreto = new Rei(4,0, tabuleiro,0);
         var rainhaPreto = new Rainha(3,0,tabuleiro,0);
@@ -44,9 +48,8 @@
         var bispo2Preto = new Bispo(2,0, tabuleiro,0);
         var cavalo1Preto = new Cavalo(6,0,tabuleiro,0);
         var cavalo2Preto = new Cavalo(1,0,tabuleiro,0);
-
-        var pecas = [];
-
+        
+        pecas.push(peao);
         pecas.push(reiBranco);
         pecas.push(rainhaBranco); 
         pecas.push(torre1Branco);
@@ -80,23 +83,8 @@
 
             tabuleiro.desenhar(ctx);
 
-            reiBranco.desenhar(ctx);
-            torre1Branco.desenhar(ctx);
-            torre2Branco.desenhar(ctx);
-            bispo1Branco.desenhar(ctx);
-            bispo2Branco.desenhar(ctx);
-            cavalo1Branco.desenhar(ctx);
-            cavalo2Branco.desenhar(ctx);
-            rainhaBranco.desenhar(ctx);
-
-            reiPreto.desenhar(ctx);
-            torre1Preto.desenhar(ctx);
-            torre2Preto.desenhar(ctx);
-            bispo1Preto.desenhar(ctx);
-            bispo2Preto.desenhar(ctx);
-            cavalo1Preto.desenhar(ctx);
-            cavalo2Preto.desenhar(ctx);
-            rainhaPreto.desenhar(ctx);
+            for(var i=0; i<pecas.length; i++)
+                pecas[i].desenhar(ctx);
 
             anterior = t;
             requestAnimationFrame(passo);

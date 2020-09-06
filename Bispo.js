@@ -1,7 +1,7 @@
 class Bispo extends Sprite{
 
-    constructor(letra,numero, tabulerio, cor=1){
-        super(letra,numero,tabulerio,cor);
+    constructor(letra,numero, tabuleiro, cor=1){
+        super(letra,numero,tabuleiro,cor);
     }
 
     verificaValidadeCasa(letra,numero){
