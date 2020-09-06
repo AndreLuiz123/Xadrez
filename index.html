@@ -38,7 +38,11 @@
         var bispo2Branco = new Bispo(2,7, tabuleiro);
         var cavalo1Branco = new Cavalo(6,7,tabuleiro);
         var cavalo2Branco = new Cavalo(1,7,tabuleiro);
-        var peao = new Peao(1,6,tabuleiro);
+        for(var i=0; i<8; i++)
+        {
+            var peao = new Peao(i,6,tabuleiro);
+            pecas.push(peao);
+        }
 
         var reiPreto = new Rei(4,0, tabuleiro,0);
         var rainhaPreto = new Rainha(3,0,tabuleiro,0);
@@ -49,6 +53,12 @@
         var cavalo1Preto = new Cavalo(6,0,tabuleiro,0);
         var cavalo2Preto = new Cavalo(1,0,tabuleiro,0);
         
+        for(var i=0; i<8; i++)
+        {
+            var peao = new Peao(i,1,tabuleiro,0);
+            pecas.push(peao);
+        }
+
         pecas.push(peao);
         pecas.push(reiBranco);
         pecas.push(rainhaBranco); 
